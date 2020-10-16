@@ -106,7 +106,7 @@ class Synthesizer:
 		audio_filenames = []
 		for i, (generated_wav, input_mel, upsampled_feature) in enumerate(zip(generated_wavs, mel_spectrograms, upsampled_features)):
 			#Save wav to disk
-			audio_filename = os.path.join(out_dir, 'wavenet-audio-{}.wav'.format(basenames[i]))
+			audio_filename = os.path.join(out_dir, '{}.wav'.format(basenames[i]))
 			save_wavenet_wav(generated_wav, audio_filename, sr=hparams.sample_rate, inv_preemphasize=hparams.preemphasize, k=hparams.preemphasis)
 			audio_filenames.append(audio_filename)
 

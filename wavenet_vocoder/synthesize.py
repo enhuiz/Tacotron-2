@@ -67,7 +67,8 @@ def run_synthesis(args, checkpoint_path, output_dir, hparams):
 
 
 def wavenet_synthesize(args, hparams, checkpoint):
-	output_dir = 'wavenet_' + args.output_dir
+	# output_dir = 'wavenet_' + args.output_dir
+        output_dir = args.output_dir
 
 	try:
 		checkpoint_path = tf.train.get_checkpoint_state(checkpoint).model_checkpoint_path
