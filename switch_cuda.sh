@@ -54,33 +54,14 @@ fi
 
 # the path of the installation to use
 cuda_path="${INSTALL_FOLDER}/cuda-${TARGET_VERSION}"
-
-# filter out those CUDA entries from the PATH that are not needed anymore
-path_elements=(${PATH//:/ })
-new_path="${cuda_path}/bin"
-for p in "${path_elements[@]}"; do
-    if [[ ! ${p} =~ ^${INSTALL_FOLDER}/cuda ]]; then
-        new_path="${new_path}:${p}"
-    fi
-done
-
-# filter out those CUDA entries from the LD_LIBRARY_PATH that are not needed anymore
-ld_path_elements=(${LD_LIBRARY_PATH//:/ })
 new_ld_path="${cuda_path}/lib64:${cuda_path}/extras/CUPTI/lib64"
-for p in "${ld_path_elements[@]}"; do
-    if [[ ! ${p} =~ ^${INSTALL_FOLDER}/cuda ]]; then
-        new_ld_path="${new_ld_path}:${p}"
-    fi
-done
 
 # update environment variables
 export CUDA_HOME="${cuda_path}"
 export CUDA_ROOT="${cuda_path}"
 export LD_LIBRARY_PATH="${new_ld_path}"
-export PATH="${new_path}"
 
 echo "Switched to CUDA ${TARGET_VERSION}."
 
 set +e
 return
-
